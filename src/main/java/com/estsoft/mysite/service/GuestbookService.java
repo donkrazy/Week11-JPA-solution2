@@ -4,35 +4,27 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.estsoft.mysite.dao.GuestbookDao;
-import com.estsoft.mysite.vo.GuestbookVo;
+import com.estsoft.mysite.domain.Guestbook;
+import com.estsoft.mysite.repository.GuestbookRepository;
 
 @Service
+@Transactional
 public class GuestbookService {
+	
 	@Autowired
-	GuestbookDao guestbookDao;
+	GuestbookRepository guestbookRepository;
 
-	public List<GuestbookVo> getMessageList() {
-		System.out.println( guestbookDao );
-		return guestbookDao.getList();
-	}
-
-	public List<GuestbookVo> getMessageList( int page ) {
-		return guestbookDao.getList( page );
+	public List<Guestbook> getMessageList() {
+		return guestbookRepository.findAll();
 	}
 	
-	public boolean deleteMessage( GuestbookVo vo ) {
-		return guestbookDao.delete( vo ) == 1;
+	public boolean deleteMessage( Guestbook guestbook ) {
+		return guestbookRepository.remove( guestbook );
 	}
 	
-	public GuestbookVo insertMessage( GuestbookVo vo ) {
-		Long no = guestbookDao.insert( vo );
-		if( no == 0 ) {
-			return null;
-		}
-		
-		GuestbookVo guestbookVo = guestbookDao.get( no );
-		return guestbookVo;
+	public void insertMessage( Guestbook guestbook ) {
+		guestbookRepository.save( guestbook );
 	}
 }

@@ -83,10 +83,6 @@ $(function(){
 })
 </script>	
 </head>
-<spring:hasBindErrors name="userVo">
---${errors.hasFieldErrors('name') }--<br>
---${errors.hasFieldErrors('email') }---
-</spring:hasBindErrors>
 <body>
 	<div id="container">
 		<c:import url="/WEB-INF/views/include/header.jsp" />
@@ -98,7 +94,7 @@ $(function(){
 					action="${pageContext.request.contextPath}/user/join">
 					<label class="block-label" for="name">이름</label>
 					<input id="name" name="name" type="text" value="">
-					<spring:hasBindErrors name="userVo">
+					<spring:hasBindErrors name="user">
 					   <c:if test="${errors.hasFieldErrors('name') }">
 					        	<br>
 					        	<strong style="color:red">
@@ -112,7 +108,7 @@ $(function(){
 					<input id="email" name="email" type="text" value="">
 					<input id="btn-checkemail" type="button" value="id 중복체크">
 					<img id="img-checkemail" style="display:none;" src="${pageContext.request.contextPath}/assets/images/check.png">
-					<spring:hasBindErrors name="userVo">
+					<spring:hasBindErrors name="user">
 					   <c:if test="${errors.hasFieldErrors('email') }">
 					        <br>
 					        <strong style="color:red">
@@ -121,16 +117,14 @@ $(function(){
 					        </strong>
 					   </c:if>
 					</spring:hasBindErrors>					
-					
-					
-					
+				
 					<label class="block-label">패스워드</label>
 					<input name="password" type="password" value="">
 					
 					<fieldset>
 						<legend>성별</legend>
-						<label>여</label> <input type="radio" name="gender" value="F" checked="checked">
-						<label>남</label> <input type="radio" name="gender" value="M">
+						<label>여</label> <input type="radio" name="gender" value="Female" checked="checked">
+						<label>남</label> <input type="radio" name="gender" value="Male">
 					</fieldset>
 					
 					<fieldset>
