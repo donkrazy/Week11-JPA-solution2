@@ -4,20 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.estsoft.mysite.dao.UserDao;
+import com.estsoft.mysite.domain.User;
+import com.estsoft.mysite.repository.UserRepository;
 import com.estsoft.mysite.vo.UserVo;
 
 @Service
 public class UserService {
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private UserRepository userRepository;
 	
-	// @Autowired
-	// private MailSender mailSender;
-	
-	public void join( UserVo vo ) {
-		userDao.insert(vo);
-		// 메일보내기
-		// ..
+	public void join( User user ) {
+		userRepository.save( user );
 	}
 	
 	public UserVo login( UserVo vo ) {
@@ -25,8 +25,8 @@ public class UserService {
 		return authUser;
 	}
 	
-	public UserVo getUser( String email ) {
-		UserVo vo = userDao.get( email );
-		return vo;
+	public User getUser( String email ) {
+		User user = userRepository.findByEmail( email );
+		return user;
 	}
 }

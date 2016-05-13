@@ -39,7 +39,7 @@ public class UserController {
 			model.addAllAttributes( result.getModel() );
 			return "/user/joinform";
 		}
-//		userService.join( user );
+		userService.join( user );
 		return "redirect:/user/joinsuccess";
 	}
 	
@@ -58,7 +58,7 @@ public class UserController {
 	public Object checkEmail( 
 		@RequestParam( value="email", required=true, defaultValue="" ) String email ) {
 		
-		UserVo vo = userService.getUser( email );
+		User user = userService.getUser( email );
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "result", "success" );
