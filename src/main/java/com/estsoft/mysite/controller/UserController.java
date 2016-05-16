@@ -62,14 +62,8 @@ public class UserController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "result", "success" );
-		map.put( "data", vo == null );
+		map.put( "data", user == null );
 
 		return map;
-	}
-
-	@RequestMapping( "/hello" )
-	@ResponseBody
-	public String hello() {
-		return "hello:안녕";
 	}
 }

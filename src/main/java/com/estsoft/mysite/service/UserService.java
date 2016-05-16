@@ -2,6 +2,7 @@ package com.estsoft.mysite.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.estsoft.mysite.dao.UserDao;
 import com.estsoft.mysite.domain.User;
@@ -9,6 +10,7 @@ import com.estsoft.mysite.repository.UserRepository;
 import com.estsoft.mysite.vo.UserVo;
 
 @Service
+@Transactional
 public class UserService {
 	@Autowired
 	private UserDao userDao;
