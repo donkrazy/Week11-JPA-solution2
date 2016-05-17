@@ -88,7 +88,7 @@
 			<version>4.3.8.Final</version>
 		</dependency>
 
-		<!-- queryDSL -->
+		<!-- QueryDSL -->
 		<dependency>
 			<groupId>com.mysema.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
@@ -100,20 +100,6 @@
 			<artifactId>querydsl-apt</artifactId>
 			<version>3.6.2</version>
 			<scope>provided</scope>
-		</dependency>
-		
-		
-		<!-- spring jdbc -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-		<!-- MyBatis -->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.2.2</version>
 		</dependency>
 
 		<dependency>

@@ -7,10 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.sql.DataSource;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,13 +19,6 @@ public class BoardDao {
 	
 	@Autowired
 	private DataSource dataSource;
-
-	@Autowired
-	private SqlSession sqlSession;
-
-	public BoardVo get( Long boardNo ) {
-		return sqlSession.selectOne( "board.getByNo", boardNo );
-	}
 	
 	public long getTotalCount( String keyword ) {
 		long count = 0;
