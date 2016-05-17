@@ -1,14 +1,12 @@
 package com.estsoft.mysite.repository;
 
-import java.util.List;
+import static com.estsoft.mysite.domain.QUser.user;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.springframework.stereotype.Repository;
-
-import com.estsoft.mysite.domain.Guestbook;
 import com.estsoft.mysite.domain.User;
+import com.mysema.query.jpa.impl.JPAQuery;
 
 @Repository
 public class UserRepository {
@@ -21,7 +19,9 @@ public class UserRepository {
 	}
 	
 	public User findByEmailAndPassword( String email, String password ) {
-		String jpql = "select u from User u where u.email = :email and u.password = :password";
+/*		JPQL
+
+		String jpql = "selct u from User u where u.email = :email and u.password = :password";
 		List<User> list = 
 		em.
 		createQuery( jpql, User.class ).
@@ -29,26 +29,28 @@ public class UserRepository {
 		setParameter( "password", password ).
 		getResultList();
 		
-		if( list.size() == 1 ) {
-			return null;
-		}
-		
-		return list.get( 0 );
+*/
+		// QueryDSL
+		return new JPAQuery( em ).
+			from( user ).
+			where( user.email.eq( email ), user.password.eq( password ) ).
+			singleResult( user );
 	}
 
 	public User findByEmail( String email ) {
+/*		JPQL
+ 		
 		String jpql = "select u from User u where u.email = :email";
 		List<User> list = 
 		em.
 		createQuery( jpql, User.class ).
 		setParameter( "email", email ).
 		getResultList();
-		
-		if( list.size() != 1 ) {
-			return null;
-		}
-		
-		return list.get( 0 );
+*/
+		// QueryDSL
+		return new JPAQuery( em ).
+			from( user ).
+			where( user.email.eq( email ) ).
+			singleResult( user );
 	}
-	
 }

@@ -2,15 +2,12 @@ package com.estsoft.mysite.repository;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.springframework.stereotype.Repository;
-
 import com.estsoft.mysite.domain.Guestbook;
-import static com.estsoft.mysite.domain.QGuestbook.guestbook;
 import com.mysema.query.jpa.impl.JPAQuery;
+import static com.estsoft.mysite.domain.QGuestbook.guestbook;
 
 @Repository
 public class GuestbookRepository {

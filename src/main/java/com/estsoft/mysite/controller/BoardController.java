@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.estsoft.mysite.annotation.Auth;
 import com.estsoft.mysite.annotation.AuthUser;
+import com.estsoft.mysite.domain.User;
 import com.estsoft.mysite.service.BoardService;
 import com.estsoft.mysite.vo.BoardVo;
-import com.estsoft.mysite.vo.UserVo;
 
 @Controller
 @RequestMapping("/board")
@@ -42,7 +42,7 @@ public class BoardController {
 
 	@Auth
 	@RequestMapping("/insert")
-	public String insert(@ModelAttribute BoardVo vo,	@AuthUser UserVo authUser ) {
+	public String insert(@ModelAttribute BoardVo vo, @AuthUser User authUser ) {
 		
 		System.out.println( authUser );
 		

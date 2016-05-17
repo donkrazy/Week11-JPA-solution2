@@ -3,12 +3,10 @@ package com.estsoft.mysite.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
+import com.estsoft.mysite.domain.User;
 import com.estsoft.mysite.service.UserService;
-import com.estsoft.mysite.vo.UserVo;
 
 public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 	
@@ -18,25 +16,22 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 		throws Exception {
-//		ApplicationContext applicationContext =   
-//				WebApplicationContextUtils.getWebApplicationContext( request.getServletContext() );		
-//		UserService userService = applicationContext.getBean( UserService.class );
 
 		String email = request.getParameter( "email" );
 		String password = request.getParameter( "password" );
 
-		UserVo userVo = new UserVo();
-		userVo.setEmail(email);
-		userVo.setPassword(password);
+		User user = new User();
+		user.setEmail( email );
+		user.setPassword( password );
 		
-		//login 서비스 호출 (로긴 작업)
-		UserVo authUser = userService.login( userVo );
+		//login 
+		User authUser = userService.login( user );
 		if( authUser == null ) {
 			response.sendRedirect( request.getContextPath() + "/user/loginform" );
 			return false;
 		}
 		
-		//로그인 처리
+		//
 		HttpSession session = request.getSession( true );
 		session.setAttribute( "authUser", authUser );
 		response.sendRedirect( request.getContextPath() );

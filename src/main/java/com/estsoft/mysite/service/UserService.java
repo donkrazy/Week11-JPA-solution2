@@ -3,17 +3,12 @@ package com.estsoft.mysite.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.estsoft.mysite.dao.UserDao;
 import com.estsoft.mysite.domain.User;
 import com.estsoft.mysite.repository.UserRepository;
-import com.estsoft.mysite.vo.UserVo;
 
 @Service
 @Transactional
 public class UserService {
-	@Autowired
-	private UserDao userDao;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -22,8 +17,8 @@ public class UserService {
 		userRepository.save( user );
 	}
 	
-	public UserVo login( UserVo vo ) {
-		UserVo authUser = userDao.get( vo );
+	public User login( User vo ) {
+		User authUser = userRepository.findByEmailAndPassword(vo.getEmail(), vo.getPassword() );
 		return authUser;
 	}
 	
